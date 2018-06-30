@@ -30,6 +30,9 @@ app.get('/', (req, res) => {
 // if above routes don't work, we 404 them and pass to error handler.
 app.use(errorHandlers.notFound);
 
+// check to see if errors are just validation
+app.use(errorHandlers.flashValidationErrors);
+
 // error handling
 if (app.get('env') === 'development') {
   // Development Error Handler - gives stack trace
@@ -39,4 +42,5 @@ if (app.get('env') === 'development') {
 // Production Error Handler
 app.use(errorHandlers.productionErrors);
 
+// done!
 module.exports = app;

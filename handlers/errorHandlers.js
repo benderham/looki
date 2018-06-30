@@ -21,6 +21,19 @@ exports.notFound = (req, res, next) => {
 };
 
 /**
+ * MongoDB Validation Error Handler
+ *
+ * Detect if there is any MongoDB validation errors that can be shown via
+ * flash messages.
+ */
+exports.flashValidationErrors = (err, req, res, next) => {
+  if (!err.errors) return next(err);
+  const errorKeys = Object.keys(err.errors);
+  errorKeys.forEach(key => req.flash('error', err.errors[key].message));
+  res.redirect('back');
+};
+
+/**
  * Development Error Handler
  *
  * In development, show detailed error messages.

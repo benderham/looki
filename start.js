@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 // Make sure we are running at node 8.11+
 const [major, minor] = process.versions.node.split('.').map(parseFloat);
 if (major < 8 || (major === 8 && minor <= 10)) {
@@ -7,6 +9,13 @@ if (major < 8 || (major === 8 && minor <= 10)) {
 
 // Import environment variables from .env file
 require('dotenv').config({ path: '.env' });
+
+// Connect to database and handle any bad connections
+mongoose.connect(process.env.DATABASE);
+mongoose.Promise = global.Promise; // tell Mongoose to use ES6 promises
+mongoose.connection.on('error', err => {
+  console.error(`DATABASE CONNECTION ERROR -> ${err.messsage}`);
+});
 
 // Start the party!
 const app = require('./app');
