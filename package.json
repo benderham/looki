@@ -1,8 +1,10 @@
 {
   "scripts": {
+    "watch": "nodemon ./start.js --ignore public/",
     "test": "jest"
   },
   "dependencies": {
+    "dotenv": "^6.0.0",
     "express": "^4.16.3"
   },
   "devDependencies": {
