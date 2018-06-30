@@ -21,6 +21,19 @@ exports.notFound = (req, res, next) => {
 };
 
 /**
+ * MongoDB Validation Error Handler
+ *
+ * Detect if there is any MongoDB validation errors that can be shown via
+ * flash messages.
+ */
+exports.flashValidationErrors = (err, req, res, next) => {
+  if (!err.errors) return next(err);
+  const errorKeys = Object.keys(err.errors);
+  errorKeys.forEach(key => req.flash('error', err.errors[key].message));
+  res.redirect('back');
+};
+
+/**
  * Development Error Handler
  *
  * In development, show detailed error messages.
@@ -33,13 +46,7 @@ exports.developmentErrors = (err, req, res, next) => {
     stackHighlighted: errorStack.replace(/[a-z_-\d]+.js:\d+:\d+/gi, '<mark>$&</mark>'),
   };
   res.status(err.status || 500);
-  res.format({
-    // Based on the `Accept` http header
-    'text/html': () => {
-      res.render('error', errorDetails);
-    }, // Form Submit, reload the page
-    'application/json': () => res.json(errorDetails), // Ajax call, send JSON back
-  });
+  res.json(errorDetails);
 };
 
 /**
@@ -49,7 +56,7 @@ exports.developmentErrors = (err, req, res, next) => {
  */
 exports.productionErrors = (err, req, res, next) => {
   res.status(err.status || 500);
-  res.reder('error', {
+  res.json({
     message: err.message,
     error: {},
   });
