@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const path = require('path');
 const errorHandlers = require('./handlers/errorHandlers');
+const routes = require('./routes');
 
 // create express app
 const app = express();
@@ -22,10 +23,8 @@ app.use(cookieParser());
 // on message to next page a user requests.
 app.use(flash());
 
-// a default route, this will be moved to routes/ when actual routes are developed.
-app.get('/', (req, res) => {
-  res.status(200).send('Hello World!');
-});
+// handle routes
+app.use('/', routes);
 
 // if above routes don't work, we 404 them and pass to error handler.
 app.use(errorHandlers.notFound);
