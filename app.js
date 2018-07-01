@@ -2,9 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
+const passport = require('passport');
 const path = require('path');
 const errorHandlers = require('./handlers/errorHandlers');
 const routes = require('./routes');
+require('./handlers/passport');
 
 // create express app
 const app = express();
@@ -18,6 +20,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // populate req.cookies with any cookies in the request
 app.use(cookieParser());
+
+// auth handled by Passport JS
+app.use(passport.initialize());
 
 // flash middleware let's us use req.flash('error', 'ruh oh!'), which passes
 // on message to next page a user requests.
