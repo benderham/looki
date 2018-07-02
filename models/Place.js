@@ -6,4 +6,4 @@ const placeSchema = new mongoose.Schema({
   text: String,
 });
 
-module.exports = mongoose.model('Place', placeSchema);
+export default mongoose.model('Place', placeSchema);

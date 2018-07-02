@@ -1,6 +1,5 @@
 import { makeExecutableSchema } from 'graphql-tools';
 import resolvers from './resolvers';
-// import mocks from '../mocks/Place';
 
 const typeDefs = `
   type Place {
@@ -20,7 +19,6 @@ const typeDefs = `
 `;
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
-// addMockFunctionsToSchema({ schema, mocks });
 
 export default schema;
 

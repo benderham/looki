@@ -47,4 +47,4 @@ if (app.get('env') === 'development') {
 app.use(errorHandlers.productionErrors);
 
 // done!
-module.exports = app;
+export default app;
