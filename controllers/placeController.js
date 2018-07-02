@@ -1,4 +1,4 @@
-const Place = require('../models/Place');
+import Place from '../models/Place';
 
 exports.getPlaces = async (req, res) => {
   const places = await Place.find();

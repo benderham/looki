@@ -1,16 +1,17 @@
-import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
-import mocks from '../mocks/Place';
+import { makeExecutableSchema } from 'graphql-tools';
+import resolvers from './resolvers';
+// import mocks from '../mocks/Place';
 
 const typeDefs = `
+  type Place {
+    id: String
+    name: String
+    text: String
+  }
+
   type Query {
     place(name: String): Place
     allPlaces: [Place]
-  }
-
-  type Place {
-    id: Int
-    name: String
-    text: String
   }
 
   schema {
@@ -18,7 +19,10 @@ const typeDefs = `
   }
 `;
 
-const schema = makeExecutableSchema({ typeDefs });
-addMockFunctionsToSchema({ schema, mocks });
+const schema = makeExecutableSchema({ typeDefs, resolvers });
+// addMockFunctionsToSchema({ schema, mocks });
 
 export default schema;
+
+// models >> model >> schema, resolver, connector
+// >> schema.js, resolver.js, connector.js

@@ -1,10 +1,9 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 mongoose.Promise = global.Promise;
 const placeSchema = new mongoose.Schema({
   name: String,
-  description: String,
-  category: String,
+  text: String,
 });
 
 module.exports = mongoose.model('Place', placeSchema);

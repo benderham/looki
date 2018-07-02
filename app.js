@@ -1,12 +1,12 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const flash = require('connect-flash');
-const passport = require('passport');
-const path = require('path');
-const errorHandlers = require('./handlers/errorHandlers');
-const routes = require('./routes');
-require('./handlers/passport');
+import express from 'express';
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import flash from 'connect-flash';
+import passport from 'passport';
+import path from 'path';
+import errorHandlers from './handlers/errorHandlers';
+import routes from './routes';
+import './handlers/passport';
 
 // create express app
 const app = express();

@@ -1,10 +1,9 @@
 import casual from 'casual';
 
 const mocks = {
-  // String: () => 'It Works!',
-  // Query: () => ({
-  //   place: (root, args) => ({ name: args.title, text: args.text }),
-  // }),
+  Query: () => ({
+    place: (root, args) => ({ name: args.name }),
+  }),
   Place: () => ({ name: casual.title, text: casual.sentences(3) }),
 };
 

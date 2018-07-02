@@ -1,6 +1,6 @@
-const passport = require('passport');
-const LocalAPIKeyStrategy = require('passport-localapikey').Strategy;
-const ApiUser = require('./../models/ApiUser');
+import passport from 'passport';
+import { Strategy as LocalAPIKeyStrategy } from 'passport-localapikey';
+import ApiUser from '../models/ApiUser';
 
 passport.use(
   new LocalAPIKeyStrategy((apikey, done) => {
