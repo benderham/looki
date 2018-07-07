@@ -6,7 +6,10 @@ import mongoose from 'mongoose';
 mongoose.Promise = global.Promise;
 const placeSchema = new mongoose.Schema({
   name: String,
-  text: String,
+  short_description: String,
+  location: String,
+  long_description: String,
+  updated: { type: Date, default: Date.now },
 });
 export const Place = mongoose.model('Place', placeSchema);
 
@@ -21,8 +24,11 @@ export const typeDef = `
 
   type Place {
     id: String
-    name: String
-    text: String
+    name: String!
+    short_description: String
+    location: String
+    long_description: String
+    updated: Int
   }
 `;
 

@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  .uk-container.uk-padding
+    h1= title
+    p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  .uk-container
+    table.uk-table.uk-table-responsive.uk-table-divider
+      thead
+        tr
+          th Name
+          th Location
+          th Updated
+        tbody
+        each place in places
+          tr
+            td.uk-table-expand= place.name
+            td.uk-width-medium= place.location
+            td.uk-width-small= 'Date Modified'
+            td.uk-width-small
+              ul.uk-iconnav
+                li
+                  a(href='./' uk-icon='icon: pencil')
+                li
+                  a(href='./' uk-icon='icon: trash')
+
+    a.uk-button.uk-button-primary.uk-align-right Add New

@@ -7,6 +7,7 @@ import schema from '../models/schema';
 
 const router = express.Router();
 
+// rest endpoints
 router.get('/api/places', authController.apiAuth, catchErrors(placeController.getPlaces));
 
 // graphQl endpoint
@@ -16,5 +17,8 @@ router.use(
   authController.apiAuth,
   graphiqlExpress({ endpointURL: '/api/graphql' }),
 );
+
+// admin pages
+router.get('/admin/places', catchErrors(placeController.adminPlaces));
 
 module.exports = router;

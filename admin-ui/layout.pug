@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    title= `Looki Admin - ${title}`
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Open+Sans')
+    link(rel='stylesheet', href='./css/uikit.min.css')
+    style.
+      html {
+        font-family: 'Open Sans', sans-serif;
+      }
+    //- link(rel="shortcut icon" type="image/png" href="/images/icons/doughnut.png")
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+  body
+    nav.uk-navbar-container(uk-navbar)
+      .uk-navbar-left
+        a.uk-navbar-item.uk-logo(href='./') Looki Admin
+        ul.uk-navbar-nav
+          li(class=(currentPath.startsWith('/admin/users') ? 'uk-active' : ''))
+            a(href='./' ) Users
+          li(class=(currentPath.startsWith('/admin/places') ? 'uk-active' : ''))
+            a(href='./places' ) Places
+          li
+            a(href='')
+      .uk-navbar-right
+        ul.uk-navbar-nav
+          li
+            a(href='./') Login
+    block content
+
+  block scripts
+    script(src='./js/uikit.min.js')
+    script(src='./js/uikit-icons.min.js')
