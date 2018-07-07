@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import app from './app';
 
 // Make sure we are running at node 8.11+
 const [major, minor] = process.versions.node.split('.').map(parseFloat);
@@ -18,8 +19,6 @@ mongoose.connection.on('error', err => {
 });
 
 // Start the party!
-const app = require('./app');
-
 app.set('port', process.env.PORT || 7777);
 const server = app.listen(app.get('port'), () => {
   console.log(`Express running on PORT ${server.address().port}`);
