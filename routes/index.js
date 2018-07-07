@@ -3,7 +3,7 @@ import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
 import authController from '../controllers/authController';
 import placeController from '../controllers/placeController';
 import { catchErrors } from '../handlers/errorHandlers';
-import schema from '../data/schema';
+import schema from '../models/schema';
 
 const router = express.Router();
 
