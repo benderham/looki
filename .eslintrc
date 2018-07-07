@@ -5,6 +5,7 @@
   "extends": ["airbnb-base"],
   "rules": {
     "arrow-parens": 0,
+    "func-names": 0,
     "no-console": 0
   }
 }
