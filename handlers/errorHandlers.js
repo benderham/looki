@@ -47,6 +47,7 @@ exports.developmentErrors = (err, req, res, next) => {
   };
   res.status(err.status || 500);
   res.json(errorDetails);
+  next();
 };
 
 /**
@@ -60,4 +61,5 @@ exports.productionErrors = (err, req, res, next) => {
     message: err.message,
     error: {},
   });
+  next();
 };

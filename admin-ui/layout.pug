@@ -3,7 +3,7 @@ html
   head
     title= `Looki Admin - ${title}`
     link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Open+Sans')
-    link(rel='stylesheet', href='./css/uikit.min.css')
+    link(rel='stylesheet', href='/admin/css/uikit.min.css')
     style.
       html {
         font-family: 'Open Sans', sans-serif;
@@ -13,20 +13,22 @@ html
   body
     nav.uk-navbar-container(uk-navbar)
       .uk-navbar-left
-        a.uk-navbar-item.uk-logo(href='./') Looki Admin
+        a.uk-navbar-item.uk-logo(href='/admin') Looki Admin
         ul.uk-navbar-nav
           li(class=(currentPath.startsWith('/admin/users') ? 'uk-active' : ''))
-            a(href='./' ) Users
+            a(href='/admin' ) Users
           li(class=(currentPath.startsWith('/admin/places') ? 'uk-active' : ''))
-            a(href='./places' ) Places
-          li
-            a(href='')
+            a(href='/admin/places' ) Places
       .uk-navbar-right
         ul.uk-navbar-nav
           li
             a(href='./') Login
+
+    .uk-container.uk-padding
+      h1= title
+
     block content
 
   block scripts
-    script(src='./js/uikit.min.js')
-    script(src='./js/uikit-icons.min.js')
+    script(src='/admin/js/uikit.min.js')
+    script(src='/admin/js/uikit-icons.min.js')

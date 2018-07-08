@@ -10,6 +10,10 @@ const router = express.Router();
 // rest endpoints
 router.get('/api/places', authController.apiAuth, catchErrors(placeController.getPlaces));
 
+// admin pages
+router.get('/admin/places', catchErrors(placeController.adminPlaces));
+router.get('/admin/places/add', placeController.addPlace);
+
 // graphQl endpoint
 router.use('/api/graphql', authController.apiAuth, graphqlExpress({ schema }));
 router.use(
@@ -17,8 +21,5 @@ router.use(
   authController.apiAuth,
   graphiqlExpress({ endpointURL: '/api/graphql' }),
 );
-
-// admin pages
-router.get('/admin/places', catchErrors(placeController.adminPlaces));
 
 module.exports = router;

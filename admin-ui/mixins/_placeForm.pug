@@ -1,0 +1,17 @@
+mixin placeForm(place={})
+  form.uk-form-stacked(action='' method='POST' enctype='multipart/form-data')
+    pre= h.dump(place)
+    //- Name
+    div.uk-margin
+      label.uk-form-label(for="name") Name
+      input.uk-input(type="text" name="name" value=place.name)
+    //- Location
+    div.uk-margin
+      label.uk-form-label(for="location") Location
+      input.uk-input(type="text" name="location" value=place.location)
+    //- Short Description
+    div.uk-margin
+      label.uk-form-label(for="short_description") Short Description
+      div.uk-form-controls
+        textarea.uk-textarea(name="short_description" value=place.short_description)
+    //- Long Description
