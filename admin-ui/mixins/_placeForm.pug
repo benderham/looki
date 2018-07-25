@@ -9,9 +9,18 @@ mixin placeForm(place={})
     div.uk-margin
       label.uk-form-label(for="location") Location
       input.uk-input(type="text" name="location" value=place.location)
-    //- Short Description
+    //- Description
     div.uk-margin
-      label.uk-form-label(for="short_description") Short Description
+      label.uk-form-label(for="description") Description
       div.uk-form-controls
-        textarea.uk-textarea(name="short_description" value=place.short_description)
-    //- Long Description
+        textarea.uk-textarea(name="description" value=place.description)
+    //- Images
+    div.uk-margin
+      label.uk-form-label(for="Images") Images
+      div.js-upload.uk-placeholder.uk-text-center
+        span(uk-icon='icon: cloud-upload')
+        span.uk-text-middle &nbsp;Attach images by dropping them here or&nbsp;
+        div(uk-form-custom='')
+          input(type='file' multiple='')
+          span.uk-link selecting one
+      progress#js-progressbar.uk-progress(value='0' max='100' hidden='')

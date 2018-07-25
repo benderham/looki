@@ -6,12 +6,25 @@ import mongoose from 'mongoose';
 mongoose.Promise = global.Promise;
 const placeSchema = new mongoose.Schema({
   name: String,
-  short_description: String,
   location: String,
-  long_description: String,
+  description: String,
+  images: [String],
+  category: String,
+  tags: [String],
   updated: { type: Date, default: Date.now },
 });
 export const Place = mongoose.model('Place', placeSchema);
+
+// Name
+// Address
+// Category - not sure exactly but to help filter, like Pub, Park, etc
+// Description
+// Photos
+// Features:
+//  - wheelchair-accessible main
+//  - wheelchair-accessible toilets
+//  - hearing loop (probably has a proper name)
+//  - parenting room? like for changing and/or nursing?
 
 /**
  * GraphQl Schema
@@ -25,10 +38,12 @@ export const typeDef = `
   type Place {
     id: String
     name: String!
-    short_description: String
     location: String
-    long_description: String
-    updated: Int
+    description: String
+    images: [String]
+    category: String
+    tags: [String]
+    updated: String
   }
 `;
 
