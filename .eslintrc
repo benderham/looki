@@ -1,5 +1,4 @@
 {
-  "eslint.packageManager": "yarn",
   "env": {
     "node": true
   },
