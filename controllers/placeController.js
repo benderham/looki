@@ -13,3 +13,9 @@ exports.adminPlaces = async (req, res) => {
 exports.addPlace = (req, res) => {
   res.render('editPlace', { title: 'Add Place' });
 };
+
+exports.createPlace = async (req, res) => {
+  const place = await new Place(req.body).save();
+  req.flash('success', `Successfully Created ${place.name}.`);
+  res.redirect('/admin/places');
+};

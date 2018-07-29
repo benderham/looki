@@ -27,6 +27,15 @@ html
     .uk-container.uk-padding
       h1= title
 
+    block messages
+      if locals.flashes
+        - const categories = Object.keys(locals.flashes)
+        each category in categories
+          each message in flashes[category]
+            div
+              p!= message
+              button(onClick="this.parentElement.remove()") &times;
+
     block content
 
   block scripts

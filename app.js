@@ -1,13 +1,21 @@
-import express from 'express';
 import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
 import flash from 'connect-flash';
+import cookieParser from 'cookie-parser';
+import express from 'express';
+import session from 'express-session';
+import moment from 'moment';
+import mongoose from 'mongoose';
 import passport from 'passport';
 import path from 'path';
 import errorHandlers from './handlers/errorHandlers';
+import './handlers/passport';
 import helpers from './helpers';
 import routes from './routes';
-import './handlers/passport';
+
+const MongoStore = require('connect-mongo')(session);
+
+// Import environment variables from .env file
+require('dotenv').config({ path: '.env' });
 
 // create express app
 const app = express();
@@ -30,6 +38,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // populate req.cookies with any cookies in the request
 app.use(cookieParser());
 
+// Sessions allow us to store data on visitors from request to request
+// This keeps users logged in and allows us to send flash messages
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  }),
+);
+
 // auth handled by Passport JS
 app.use(passport.initialize());
 
@@ -40,7 +59,8 @@ app.use(flash());
 // pass variables to our templates + all requests
 app.use((req, res, next) => {
   res.locals.h = helpers;
-  // res.locals.flashes = req.flash();
+  res.locals.moment = moment;
+  res.locals.flashes = req.flash();
   res.locals.currentPath = req.path;
   next();
 });

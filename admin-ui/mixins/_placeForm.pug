@@ -1,26 +1,59 @@
 mixin placeForm(place={})
-  form.uk-form-stacked(action='' method='POST' enctype='multipart/form-data')
+  form.uk-form-stacked(action=`/admin/places/add/${place._id || ''}` method='POST' )
+    //- enctype='multipart/form-data'
     pre= h.dump(place)
     //- Name
-    div.uk-margin
+    .uk-margin
       label.uk-form-label(for="name") Name
       input.uk-input(type="text" name="name" value=place.name)
     //- Location
-    div.uk-margin
+    .uk-margin
       label.uk-form-label(for="location") Location
       input.uk-input(type="text" name="location" value=place.location)
+    //- Email Address
+    .uk-margin
+      label.uk-form-label(for="email") Email Address
+      input.uk-input(type="email" name="email" value=place.email)
+    //- Phone Number
+    .uk-margin
+      label.uk-form-label(for="phone") Phone Number
+      input.uk-input(type="text" name="phone" value=place.phone)
+    //- URL
+    .uk-margin
+      label.uk-form-label(for="url") Website URL
+      input.uk-input(type="text" name="url" value=place.url)
     //- Description
-    div.uk-margin
+    .uk-margin
       label.uk-form-label(for="description") Description
-      div.uk-form-controls
-        textarea.uk-textarea(name="description" value=place.description)
-    //- Images
-    div.uk-margin
-      label.uk-form-label(for="Images") Images
-      div.js-upload.uk-placeholder.uk-text-center
+      .uk-form-controls
+        textarea.uk-textarea(name="description")= place.description
+    //- Image
+    .uk-margin
+      label.uk-form-label(for="image") Image
+      .js-upload.uk-placeholder.uk-text-center
         span(uk-icon='icon: cloud-upload')
-        span.uk-text-middle &nbsp;Attach images by dropping them here or&nbsp;
+        br
+        span.uk-text-middle Attach image by dropping it here or&nbsp;
         div(uk-form-custom='')
-          input(type='file' multiple='')
-          span.uk-link selecting one
+          input(type='file' name='image' accepts='image/jpeg')
+          span.uk-link selecting one.
       progress#js-progressbar.uk-progress(value='0' max='100' hidden='')
+    //- Category
+    - const categories = ['Accommodation', 'Beaches', 'Entertainment', 'Food and Dining', 'Parks and Playgrounds', 'Places of Worship', 'Sport and Recreation', 'Shops', 'Workplaces']
+    .uk-margin
+      label.uk-form-label(for="category") Category
+      select.uk-select
+        each category in categories
+          option(value=category) #{category}
+    //- Tags
+    - const features = ['Accessible Changing Room', 'Accessible Parking', 'Accessible Toilet', 'Hearing Loop', 'Wheelchair Accessible']
+    - const tags = place.tags || []
+    .uk-margin
+      label.uk-form-label(for="tags") Tags
+      .uk-margin.uk-grid-small.uk-child-width-auto.uk-grid
+        each feature in features
+         label(for=feature)
+          input.uk-checkbox(type="checkbox" id=feature value=feature name="tags" checked=(tags.includes(feature)))
+          | &nbsp;#{feature}
+    //- Submit
+    input.uk-button.uk-button-primary.uk-align-right(type="submit" value="Save Place")
