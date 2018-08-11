@@ -38,13 +38,15 @@ mixin placeForm(place={})
           input(type='file' name='image' accepts='image/jpeg')
           span.uk-link selecting one.
       progress#js-progressbar.uk-progress(value='0' max='100' hidden='')
+
     //- Category
     - const categories = ['Accommodation', 'Beaches', 'Entertainment', 'Food and Dining', 'Parks and Playgrounds', 'Places of Worship', 'Sport and Recreation', 'Shops', 'Workplaces']
     .uk-margin
       label.uk-form-label(for="category") Category
-      select.uk-select
+      select.uk-select(name="category")
         each category in categories
-          option(value=category) #{category}
+          option(value=category selected=(category === place.category)) #{category}
+
     //- Tags
     - const features = ['Accessible Changing Room', 'Accessible Parking', 'Accessible Toilet', 'Hearing Loop', 'Wheelchair Accessible']
     - const tags = place.tags || []
@@ -55,5 +57,6 @@ mixin placeForm(place={})
          label(for=feature)
           input.uk-checkbox(type="checkbox" id=feature value=feature name="tags" checked=(tags.includes(feature)))
           | &nbsp;#{feature}
+
     //- Submit
     input.uk-button.uk-button-primary.uk-align-right(type="submit" value="Save Place")

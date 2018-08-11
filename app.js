@@ -15,6 +15,7 @@ import routes from './routes';
 const MongoStore = require('connect-mongo')(session);
 
 // Import environment variables from .env file
+// *** Not sure why this has to be required again here ***
 require('dotenv').config({ path: '.env' });
 
 // create express app

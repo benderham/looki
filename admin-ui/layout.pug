@@ -30,11 +30,12 @@ html
     block messages
       if locals.flashes
         - const categories = Object.keys(locals.flashes)
-        each category in categories
-          each message in flashes[category]
-            div
-              p!= message
-              button(onClick="this.parentElement.remove()") &times;
+        div.uk-container.uk-padding
+          each category in categories
+            each message in flashes[category]
+              div(class=`${category === 'success' ? 'uk-alert-success' : category === 'error' ? 'uk-alert-danger' : 'uk-alert-primary'}` uk-alert)
+                != message
+                a.uk-alert-close(uk-close)
 
     block content
 

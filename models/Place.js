@@ -5,14 +5,14 @@ import mongoose from 'mongoose';
  */
 mongoose.Promise = global.Promise;
 const placeSchema = new mongoose.Schema({
-  name: String,
-  location: String,
-  email: String,
-  phone: String,
-  url: String,
-  description: String,
-  image: String,
-  category: String,
+  name: { type: String, required: true },
+  location: { type: String, required: true },
+  email: { type: String, required: true },
+  phone: { type: String, required: true },
+  url: { type: String, required: true },
+  description: { type: String, required: true },
+  image: { type: String },
+  category: { type: String, required: true },
   tags: [String],
   likes: Number,
   updated: { type: Date, default: Date.now },
