@@ -1,3 +1,4 @@
+import { sanitizeBody } from 'express-validator/filter';
 import { Place } from '../models/Place';
 
 exports.getPlaces = async (req, res) => {
@@ -14,7 +15,19 @@ exports.addPlace = (req, res) => {
   res.render('editPlace', { title: 'Add Place' });
 };
 
+exports.sanitizePlace = [
+  sanitizeBody('name')
+    .escape()
+    .trim(),
+  sanitizeBody('email').normalizeEmail({
+    gmail_remove_dots: false,
+    remove_extension: false,
+    gmail_remove_subaddress: false,
+  }),
+];
+
 exports.createPlace = async (req, res) => {
+  // if no errors
   const place = await new Place(req.body).save();
   req.flash('success', `Successfully Created ${place.name}.`);
   res.redirect('/admin/places');

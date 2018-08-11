@@ -9,7 +9,11 @@ const router = express.Router();
 
 router.get('/admin/places', catchErrors(placeController.adminPlaces));
 router.get('/admin/places/add', placeController.addPlace);
-router.post('/admin/places/add', catchErrors(placeController.createPlace));
+router.post(
+  '/admin/places/add',
+  placeController.sanitizePlace,
+  catchErrors(placeController.createPlace),
+);
 
 // API
 // rest endpoints

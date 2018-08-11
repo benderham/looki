@@ -1,18 +1,23 @@
 import mongoose from 'mongoose';
+import { isEmail } from 'validator';
 
 /**
  * MongoDB Schema
  */
 mongoose.Promise = global.Promise;
 const placeSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  location: { type: String, required: true },
-  email: { type: String, required: true },
-  phone: { type: String, required: true },
-  url: { type: String, required: true },
-  description: { type: String, required: true },
+  name: { type: String, required: 'Name is required!' },
+  location: { type: String, required: false },
+  email: {
+    type: String,
+    required: 'Email Address is required!',
+    validate: { validator: isEmail, message: 'A valid Email Address is required!' },
+  },
+  phone: { type: String, required: false },
+  url: { type: String, required: false },
+  description: { type: String, required: false },
   image: { type: String },
-  category: { type: String, required: true },
+  category: { type: String, required: false },
   tags: [String],
   likes: Number,
   updated: { type: Date, default: Date.now },
