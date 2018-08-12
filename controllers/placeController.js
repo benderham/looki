@@ -27,7 +27,6 @@ exports.sanitizePlace = [
 ];
 
 exports.createPlace = async (req, res) => {
-  // if no errors
   const place = await new Place(req.body).save();
   req.flash('success', `Successfully Created ${place.name}.`);
   res.redirect('/admin/places');
